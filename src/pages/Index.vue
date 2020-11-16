@@ -1,7 +1,10 @@
 <template>
     <div>
-      <div class="btn-item" @click="open">
-          <div>选择时间</div>
+      <div class="btn-item" @click="open('date')">
+          <div>选择时间date</div>
+      </div>
+      <div class="btn-item" @click="open('datetime')">
+          <div>选择时间datetime</div>
       </div>
       <div class="time-wrapper">
         <div class="time-item">
@@ -19,7 +22,7 @@
           v-model="dateValue"
           :startDate="startDate"
           :endDate="endDate"
-          type="datetime"
+          :type="type"
           year-format="{value} 年"
           month-format="{value} 月"
           date-format="{value} 日"
@@ -39,6 +42,7 @@ export default {
     return {
       startTime: '',
       endTime: '',
+      type: 'date',
       dateValue: new Date(new Date().getFullYear(), new Date().getMonth(), 1),
       startDate: new Date(new Date().getFullYear() - 10, 0, 1),
       endDate: new Date()
@@ -48,7 +52,8 @@ export default {
   mounted () {},
 
   methods: {
-    open () {
+    open (type) {
+      this.type = type;
       this.$refs.dateRangePicker.open()
     },
     dateConfirm (e) {
@@ -61,8 +66,9 @@ export default {
 
 <style scoped>
   .btn-item {
-    width: 2rem;
+    width: 3rem;
     height: 0.8rem;
+    flex: auto;
     border: 1px solid #26A2FF;
     color: #26A2FF;
     border-radius: 0.2rem;
